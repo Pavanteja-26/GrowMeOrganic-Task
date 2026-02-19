@@ -1,0 +1,208 @@
+/* ─── Reset & Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ─── Table Wrapper ─────────────────────────────────────────────────────── */
+.table-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.table-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.selection-badge {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* ─── DataTable ─────────────────────────────────────────────────────────── */
+.artwork-table {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.artwork-table .p-datatable-thead > tr > th {
+  background: #f8f9fb;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e2e8f0;
+  padding: 0.85rem 1rem;
+}
+
+.artwork-table .p-datatable-tbody > tr > td {
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eef0f3;
+  vertical-align: top;
+}
+
+.artwork-table .p-datatable-tbody > tr:hover {
+  background: #f0f6ff !important;
+}
+
+.artwork-table .p-datatable-tbody > tr.p-row-odd {
+  background: #fafbfc;
+}
+
+/* ─── Checkbox Header ───────────────────────────────────────────────────── */
+.checkbox-header {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.row-checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.chevron-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+  color: #555;
+  border-radius: 3px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.chevron-btn:hover {
+  background: #e2e8f0;
+  color: #3b82f6;
+}
+
+/* ─── Artist Cell ───────────────────────────────────────────────────────── */
+.artist-cell {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Paginator ─────────────────────────────────────────────────────────── */
+.paginator-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.5rem 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.records-info {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.p-paginator {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.p-paginator .p-paginator-page,
+.p-paginator .p-paginator-next,
+.p-paginator .p-paginator-prev {
+  min-width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 6px !important;
+  font-size: 0.85rem;
+  margin: 0 0.1rem;
+}
+
+.p-paginator .p-paginator-page.p-highlight {
+  background: #3b82f6 !important;
+  color: #fff !important;
+  border-color: #3b82f6 !important;
+}
+
+/* ─── Overlay Panel ─────────────────────────────────────────────────────── */
+.selection-overlay {
+  border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+}
+
+.overlay-content {
+  padding: 0.25rem 0.25rem 0.5rem;
+  min-width: 280px;
+}
+
+.overlay-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #1a1a2e;
+}
+
+.overlay-desc {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
+}
+
+.overlay-input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.overlay-input {
+  flex: 1;
+  font-size: 0.9rem !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+}
+
+.overlay-btn {
+  white-space: nowrap;
+  font-size: 0.85rem !important;
+}
+
+.overlay-error {
+  color: #e53e3e;
+  font-size: 0.78rem;
+  margin-top: 0.4rem;
+}
+
+/* ─── Loading ───────────────────────────────────────────────────────────── */
+.p-datatable-loading-overlay {
+  border-radius: 10px;
+}
