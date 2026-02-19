@@ -1,71 +1,66 @@
-# Art Institute of Chicago — Artwork Table
+# Art Institute of Chicago - Artwork Table
 
-A React + TypeScript + Vite application displaying artwork data from the Art Institute of Chicago API with server-side pagination and persistent cross-page row selection.
+This is my submission for the React internship assignment. It shows artwork data from the Art Institute of Chicago's public API in a table with pagination and row selection.
 
-## Tech Stack
+## Tech Used
 
-- **Vite** + **React 18** + **TypeScript**
-- **PrimeReact** DataTable, OverlayPanel, Paginator
+- Vite + React + TypeScript
+- PrimeReact (DataTable, OverlayPanel, Paginator)
 
-## Getting Started
+## How to Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open [http://localhost:5173](http://localhost:5173).
+Then go to http://localhost:5173 in your browser.
 
-## Build for Production
+To build for deployment:
 
 ```bash
 npm run build
-npm run preview
 ```
 
----
+Upload the `dist/` folder to Netlify or Cloudflare.
 
-## Features
+## What I Built
 
-### ✅ Server-Side Pagination
-Each page change triggers a fresh API call to `https://api.artic.edu/api/v1/artworks?page=N`.
-Only the current page's rows are stored in memory.
+### Table
+Displays artwork data (title, place of origin, artist, inscriptions, start date, end date) fetched from the API. Used PrimeReact's DataTable component for this.
 
-### ✅ Row Selection (Individual & Select All)
-- Checkboxes on every row + a header "select all on page" checkbox.
-- The header checkbox has an indeterminate state when only some rows are selected.
+### Pagination
+Every time you change the page, it makes a new API call to fetch just that page's data. It doesn't load everything at once.
 
-### ✅ Custom N-Row Selection Overlay
-Click the **chevron (▾)** next to the header checkbox to open an overlay panel.
-Type any number (e.g. `25`) and click **Select** — the first 25 rows across all pages are marked as selected **without fetching any other page**.
+### Row Selection
+You can check individual rows, or use the header checkbox to select/deselect everything on the current page. There's also a small chevron button next to the header checkbox that opens an overlay where you can type a number (like 25) to bulk-select the first N rows across all pages.
 
-### ✅ Persistent Cross-Page Selection
-Selections survive page navigation. The strategy:
+### Persistent Selection
+This was the tricky part. When you go to page 2 and come back to page 1, your selections are still there. I did this without pre-fetching other pages.
 
-| State variable   | Purpose |
-|------------------|---------|
-| `bulkSelectCount` | Top-N rows (globally, 0-indexed) are bulk-selected |
-| `deselectedIds`   | IDs explicitly unchecked from within the bulk range |
-| `selectedIds`     | IDs individually checked outside the bulk range |
+I used 3 pieces of state to track this:
 
-A row at **global index** `(page - 1) × 12 + rowIndex` is selected if:
+- `bulkSelectCount` - if the user bulk-selects N rows, the first N rows globally are considered selected
+- `deselectedIds` - if a row is inside the bulk range but the user unchecks it manually, its ID goes here
+- `selectedIds` - rows the user checked individually that are outside the bulk range
+
+Then for any row, I just check:
+
 ```
-(globalIndex < bulkSelectCount AND id ∉ deselectedIds)
-OR id ∈ selectedIds
+isSelected = (globalIndex < bulkSelectCount AND id not in deselectedIds)
+             OR id in selectedIds
 ```
 
-**No other pages are ever pre-fetched.** On every page render, selection state is computed from the three lightweight sets above.
+The global index is just `(page - 1) * 12 + rowIndexOnPage`. No extra API calls needed.
 
----
-
-## Project Structure
+## Folder Structure
 
 ```
 src/
 ├── components/
-│   └── ArtworkTable.tsx   # Main table with all selection logic
+│   └── ArtworkTable.tsx
 ├── types/
-│   └── artwork.ts         # TypeScript interfaces
+│   └── artwork.ts
 ├── App.tsx
 ├── main.tsx
 └── index.css
